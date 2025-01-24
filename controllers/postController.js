@@ -2,14 +2,15 @@ const blogs = require('../data/blog')
 
 //index
 const index =(req, res) =>{
-    res.json(blogs)
+    let postsFiltered = blogs;
+    if (req.query.tag){
+        postsFiltered = postsFiltered.filter((post) => post.tags.includes(req.query.tag))
+    }
+    res.json(postsFiltered)
 }
 
 //show
-const show = (req, res) =>{
-    if(isNaN(req.params.id)){
-        return res.sendStatus(400)
-    }    
+const show = (req, res) =>{    
 
     const post = blogs.find((elm) => elm.id == req.params.id)
     if(!post){
