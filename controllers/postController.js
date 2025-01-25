@@ -19,19 +19,51 @@ const show = (req, res) =>{
     res.json(post)
 }
 
-//create
+//store
 const create =(req, res) =>{
-    res.send('creazione nuovo post')
+    console.log(req.body);
+    const newId = blogs[blogs.length - 1].id +1;
+    const newPost = {
+        id : newId,
+        titolo: req.body.titolo,
+        contenuto : req.body.contenuto,
+        immagine: req.body.immagine
+    }
+    blogs.push(newPost)
+
+    res.sendStatus(201)
 }
 
 //update
 const update = (req, res) =>{
-    res.send(` modifica integrale del post: ${req.params.id}` )
+    const post = blogs.find((elm) => elm.id == req.params.id);
+
+    if(!post) {
+        return res.sendStatus(404)
+    }
+
+    post.titolo = req.body.titolo;
+    post.contenuto = req.body.contenuto;
+    post.immagine = req.body.immagine;
+
+    res.json(post)
 }
 
 //modify
 const modify = (req, res) =>{
-    res.send(` modifica parziale post: ${req.params.id}` )
+    const post = blogs.find((elm) => elm.id == req.params.id);
+
+    if(!post) {
+        return res.sendStatus(404)
+    }
+
+    posts ={
+        ...post,
+        ...req.body,
+    }
+
+    res.json(posts)
+
 }
 
 //destroy

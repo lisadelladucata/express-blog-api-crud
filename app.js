@@ -4,6 +4,8 @@ const port = 3001
 const postsRouter = require('./routers/posts')
 
 app.use(express.static('bacheca'))
+app.use(express.json())
+
 
 app.get('/', (req, res) => {
   res.send('Server del mio blog')

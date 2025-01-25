@@ -21,7 +21,7 @@ router.put('/:id', postController.update );
 router.patch('/:id', postController.modify);
 
 // destroy
-router.delete('/:id', postController.destroy );
+router.delete('/:id', postController.destroy ); 
 
 
 
