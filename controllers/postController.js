@@ -14,7 +14,10 @@ const show = (req, res) =>{
 
     const post = blogs.find((elm) => elm.id == req.params.id)
     if(!post){
-        res.sendStatus(404)
+        res.status(400).json({
+            error:'Not Found',
+            message:'non trovato'
+        });
     }
     res.json(post)
 }
@@ -39,7 +42,10 @@ const update = (req, res) =>{
     const post = blogs.find((elm) => elm.id == req.params.id);
 
     if(!post) {
-        return res.sendStatus(404)
+        return res.status(400).json({
+            error:'Not Found',
+            message:'non trovato'
+        });
     }
 
     post.titolo = req.body.titolo;
@@ -54,7 +60,10 @@ const modify = (req, res) =>{
     const post = blogs.find((elm) => elm.id == req.params.id);
 
     if(!post) {
-        return res.sendStatus(404)
+        return res.status(400).json({
+            error:'Not Found',
+            message:'non trovato'
+        });
     }
 
     posts ={
@@ -71,7 +80,10 @@ const destroy =(req, res) =>{
     const post = blogs.find((elm) => elm.id == req.params.id);
 
     if(!post) {
-        return res.sendStatus(404)
+        return res.status(400).json({
+            error:'Not Found',
+            message:'non trovato'
+        });
     }
 
     blogs.splice(blogs.indexOf(post) , 1);
